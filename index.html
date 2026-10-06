@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postpartum Depression Alert | Automated Maternal Postnatal Care & IVR Escalation</title>
+  <meta name="description" content="An automated voice-call screening system that checks on new mothers after childbirth and escalates danger signs directly to ASHA workers and PHCs across India.">
+  
+  <!-- Google Fonts: Cormorant Garamond & Jost -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- GSAP for Smooth Interactions & Motion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+
+  <!-- A11y Live Announcer for Voice/Screenreader updates -->
+  <div id="a11yLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Announcement Plum Bar -->
+  <header class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge-pulse"><i class="fa-solid fa-flask"></i> INTERACTIVE DEMO</span>
+      <span>National Postnatal Tele-Screening Prototype &bull; External Crisis Support: <strong>Tele-MANAS 14416 (Govt. of India)</strong></span>
+      <span class="medical-disclaimer"><i class="fa-solid fa-shield-halved"></i> Screening aid, not a clinical diagnosis. Independent of external helplines.</span>
+    </div>
+  </header>
+
+  <!-- Main Navigation -->
+  <nav class="navbar" id="mainNav">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Postpartum Depression Alert - Home">
+        <span class="logo-mark"><i class="fa-solid fa-heart-pulse"></i></span>
+        <div class="brand-text-group">
+          <span class="brand-text">Aanchal<strong>Alert</strong></span>
+          <span class="brand-subdescriptor">Postpartum Depression Alert</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#evidence" class="nav-link">Evidence &amp; Research</a>
+        <a href="#live-call-section" class="nav-link">Interactive Demo Call</a>
+        <a href="#timeline-section" class="nav-link">14-Day Protocol</a>
+        <a href="#dashboard-section" class="nav-link">ASHA Dashboard</a>
+        <a href="#epds-section" class="nav-link">EPDS Self-Check</a>
+        <a href="#family-companion" class="nav-link">Family Companion</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline-plum" id="openHelplineBtn" aria-label="Open external verified emergency resources modal">
+          <i class="fa-solid fa-phone-volume"></i> Verified Helplines
+        </button>
+        <a href="#live-call-section" class="btn btn-plum pulse-glow">
+          <i class="fa-solid fa-phone-arrow-up-right"></i> Try Sample Call
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Vertical Edge Text (Haus Rose aesthetic) -->
+  <div class="vertical-edge-text left-edge" aria-hidden="true">
+    <span>EVIDENCE-BASED MATERNAL SURVEILLANCE &bull; WHO 2022 RECOMMENDATIONS</span>
+  </div>
+  <div class="vertical-edge-text right-edge" aria-hidden="true">
+    <span>ASHA WORKER TRIAGE &bull; DISTRICT INTEGRATED TELE-CARE</span>
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background-pattern"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="section-tag-pill">
+            <i class="fa-solid fa-circle-dot"></i> Postpartum Depression Alert &bull; Automated Maternal Screening
+          </div>
+          <h1 class="hero-headline">
+            Every mother deserves a voice that <em>listens</em>, detects danger early, &amp; brings <em>immediate help</em>.
+          </h1>
+          <p class="hero-subtext">
+            Across India, <strong>22% of new mothers</strong> (95% CI: 19–25%, pooled meta-analysis by <em>Upadhyay et al., Bulletin of the WHO 2017</em>) face postpartum depression alongside preventable obstetric complications. Our automated IVR check-in prototype speaks her dialect (Tamil, Hindi, English), screens for danger signs, and alerts community ASHA workers and PHCs.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#live-call-section" class="btn btn-hero-primary magnetic-btn">
+              <span>Try Interactive Call Demo</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#dashboard-section" class="btn btn-hero-secondary magnetic-btn">
+              <span>Inspect ASHA Triage Queue</span>
+              <i class="fa-solid fa-clipboard-user"></i>
+            </a>
+          </div>
+
+          <div class="hero-key-metrics">
+            <div class="metric-item">
+              <span class="metric-val">22%</span>
+              <span class="metric-lbl">PPD Pooled Prevalence (WHO 2017)</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-val">&lt; 15 min</span>
+              <span class="metric-lbl">Target ASHA Escalation SLA</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-lbl">Feature Phone Accessible</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Phone Mockup (Rings and interactive on load) -->
+        <div class="hero-visual">
+          <div class="phone-mockup-wrapper" id="heroPhoneMockup">
+            <div class="phone-device">
+              <div class="phone-speaker"></div>
+              <div class="phone-screen">
+                <div class="phone-notch"></div>
+                
+                <div class="incoming-call-screen" id="heroPhoneScreen">
+                  <div class="call-source-pill">Govt Maternal Health Service</div>
+                  <div class="caller-avatar ripple-avatar">
+                    <i class="fa-solid fa-user-nurse"></i>
+                  </div>
+                  <h3 class="caller-name">ASHA Postnatal Check</h3>
+                  <p class="caller-number">+91 1800 11 14416 (Automated)</p>
+                  <p class="call-pulse-text" id="heroCallStatusText">Simulating incoming call...</p>
+
+                  <div class="call-actions-row">
+                    <button class="call-btn decline-btn" id="heroDeclineBtn" title="Decline call">
+                      <i class="fa-solid fa-phone-slash"></i>
+                    </button>
+                    <button class="call-btn answer-btn pulse-glow" id="heroAnswerBtn" title="Answer call">
+                      <i class="fa-solid fa-phone"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="active-call-ui hidden" id="heroActiveCallUI">
+                  <div class="active-call-header">
+                    <span class="active-status-dot"></span>
+                    <span>Call Connected &bull; <span id="heroCallTimer">00:12</span></span>
+                  </div>
+                  <div class="audio-waveform-bars">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="transcript-bubble" id="heroTranscriptBubble">
+                    "Namaste Sunita ji. How are you feeling today after childbirth?"
+                  </div>
+                  <div class="keypad-preview-prompt">
+                    <span>Keypad: Press 1 for YES &bull; 2 for NO</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-badge-floating">
+              <i class="fa-solid fa-shield-heart"></i>
+              <span>Screening aid, not a diagnosis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE STRIP (Haus Rose aesthetic) -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>POSTPARTUM HAEMORRHAGE SCREENING</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>PERINATAL MOOD EVALUATION</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>TELE-MANAS 14416 INTEGRATED</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>ASHA &amp; PHC RAPID ESCALATION</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>HINDI &bull; TAMIL &bull; ENGLISH VOICES</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>WHO 6-WEEK POSTNATAL PROTOCOL</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>ZERO APP DOWNLOADS REQUIRED</span> <i class="fa-solid fa-star-of-life"></i>
+        <!-- duplicate for seamless loop -->
+        <span>POSTPARTUM HAEMORRHAGE SCREENING</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>PERINATAL MOOD EVALUATION</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>TELE-MANAS 14416 INTEGRATED</span> <i class="fa-solid fa-star-of-life"></i>
+        <span>ASHA &amp; PHC RAPID ESCALATION</span> <i class="fa-solid fa-star-of-life"></i>
+      </div>
+    </div>
+
+    <!-- SECTION 1: THE LIVE SIMULATION CALL INTERACTION -->
+    <section class="live-call-section" id="live-call-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag-pill"><i class="fa-solid fa-phone"></i> Interactive Call Demo</div>
+          <h2 class="section-title">Trigger an <em>Automated IVR Call</em> Right Now</h2>
+          <p class="section-subtitle">
+            Enter a demo name and phone number. Our browser-based audio engine faithfully mirrors the full Twilio Voice IVR workflow — including speech synthesis, keypad DTMF tones, real-time SSE event streaming, and automated danger-sign triaging.
+          </p>
+        </div>
+
+        <div class="simulation-banner" id="simulationEngineBanner">
+          <div class="banner-badge"><i class="fa-solid fa-microchip"></i> IN-BROWSER AUDIO ENGINE ACTIVE</div>
+          <div class="banner-text">
+            <strong>Running in Browser Demonstration Mode:</strong> High-fidelity local voice synthesis (SpeechSynthesis + Web Audio API DTMF tones) is active. The interface is structurally prepared for seamless Twilio webhook / REST API switching in Phase 2.
+          </div>
+        </div>
+
+        <div class="call-launch-grid">
+          <!-- Call Trigger Form -->
+          <div class="card call-form-card">
+            <h3 class="card-title"><i class="fa-solid fa-sliders"></i> Initiate Postnatal Check-In</h3>
+            <p class="card-caption">All numbers are masked in accordance with healthcare privacy standards. No raw contact data is retained.</p>
+
+            <form id="callInitiateForm" novalidate>
+              <div class="form-group">
+                <label for="callerNameInput"><i class="fa-regular fa-user"></i> Mother's First Name</label>
+                <input type="text" id="callerNameInput" class="form-control" placeholder="e.g. Priya or Sunita" value="Priya" required>
+                <small class="form-hint">Used in the personalized, warm audio greeting.</small>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label for="countryCodeSelect"><i class="fa-solid fa-globe"></i> Country Code</label>
+                  <select id="countryCodeSelect" class="form-control">
+                    <option value="+91" selected>🇮🇳 India (+91)</option>
+                    <option value="+1">🇺🇸 USA (+1)</option>
+                    <option value="+44">🇬🇧 UK (+44)</option>
+                    <option value="+65">🇸🇬 Singapore (+65)</option>
+                  </select>
+                </div>
+
+                <div class="form-group flex-2">
+                  <label for="callerPhoneInput"><i class="fa-solid fa-phone"></i> Mobile Number (E.164)</label>
+                  <input type="tel" id="callerPhoneInput" class="form-control" placeholder="98765 43210" value="9876543210" required>
+                  <small class="form-hint" id="phoneMaskHint">Masked as: +91 98765 ••••10</small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="callLanguageSelect"><i class="fa-solid fa-language"></i> Preferred Spoken Dialect</label>
+                <select id="callLanguageSelect" class="form-control">
+                  <option value="en" selected>English (Indian Accent / Google en-IN)</option>
+                  <option value="hi">हिंदी Hindi (Google hi-IN)</option>
+                  <option value="ta">தமிழ் Tamil (Google ta-IN)</option>
+                </select>
+                <small class="form-hint">IVR prompts adapt vocabulary and phrasing dynamically.</small>
+              </div>
+
+              <div class="form-group">
+                <label><i class="fa-solid fa-hospital"></i> Assigned Primary Health Center (PHC)</label>
+                <select id="assignedPhcSelect" class="form-control">
+                  <option value="phc-kallakurichi">Kallakurichi Rural PHC (ASHA: Lakshmi Devi)</option>
+                  <option value="phc-dindigul">Dindigul West Sub-center (ASHA: Mary Stella)</option>
+                  <option value="phc-sitapur">Sitapur Community Health Post (ASHA: Sunita Verma)</option>
+                </select>
+              </div>
+
+              <!-- Consent Trigger Link -->
+              <div class="consent-box">
+                <div class="checkbox-wrapper">
+                  <input type="checkbox" id="consentCheckbox" required>
+                  <label for="consentCheckbox">
+                    I confirm that maternal consent has been recorded for automated postnatal surveillance, emergency contact alerting, and escalation to accredited community health workers.
+                  </label>
+                </div>
+                <button type="button" class="btn-text-link" id="viewConsentDetailsBtn">Read Full Consent Terms &amp; Data Privacy Policy</button>
+              </div>
+
+              <!-- Honeypot for spam safety -->
+              <div style="display:none;" aria-hidden="true">
+                <label for="websiteHoneypot">Leave empty</label>
+                <input type="text" id="websiteHoneypot" name="website_hp" tabindex="-1" autocomplete="off">
+              </div>
+
+              <button type="submit" class="btn btn-plum btn-full-width magnetic-btn" id="startCallSubmitBtn">
+                <i class="fa-solid fa-phone-volume"></i> Start Simulated Call
+              </button>
+            </form>
+          </div>
+
+          <!-- Quick Test Presets & Architecture Explainer -->
+          <div class="call-preset-column">
+            <div class="card preset-card">
+              <h3><i class="fa-solid fa-bolt"></i> 1-Click Triage Scenarios</h3>
+              <p class="card-caption">Instantly launch pre-configured patient responses to verify clinical escalation pathways:</p>
+
+              <div class="preset-buttons-list">
+                <button class="preset-btn urgent-preset" data-scenario="urgent-haemorrhage">
+                  <div class="preset-badge urgent-badge">CRITICAL ALERT</div>
+                  <div class="preset-info">
+                    <strong>PPH &bull; Severe Bleeding (Q1 = Yes)</strong>
+                    <span>Triggers immediate Red Alert, countdown timer &amp; direct ASHA emergency phone dial.</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button class="preset-btn urgent-preset" data-scenario="urgent-suicide">
+                  <div class="preset-badge urgent-badge">CRITICAL ALERT</div>
+                  <div class="preset-info">
+                    <strong>Crisis Ideation (Q8 = Yes)</strong>
+                    <span>Instant Red Escalation, compassionate reassurance audio &amp; Tele-MANAS 14416 card.</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button class="preset-btn followup-preset" data-scenario="followup-mood">
+                  <div class="preset-badge followup-badge">FOLLOW-UP</div>
+                  <div class="preset-info">
+                    <strong>High Perinatal Anxiety &amp; Baby Feeding Distress</strong>
+                    <span>Triggers 48-hour home visit queue for assigned ASHA worker with feeding counsel.</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button class="preset-btn safe-preset" data-scenario="safe-recovery">
+                  <div class="preset-badge safe-badge">SAFE RECOVERY</div>
+                  <div class="preset-info">
+                    <strong>Routine Normal Status (All Negative)</strong>
+                    <span>Logs successful check-in, congratulates mother, schedules Day-3 protocol check.</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card tech-card">
+              <h4><i class="fa-solid fa-server"></i> Production Architecture Ready</h4>
+              <ul class="tech-checklist">
+                <li><i class="fa-solid fa-check"></i> E.164 phone normalization with +91 default fallback</li>
+                <li><i class="fa-solid fa-check"></i> Twilio TwiML <code>&lt;Say&gt;</code> and <code>&lt;Gather input="dtmf"&gt;</code> state machine</li>
+                <li><i class="fa-solid fa-check"></i> Server-Sent Events (SSE) telemetry timeline pipeline</li>
+                <li><i class="fa-solid fa-check"></i> Web Audio Synthesizer DTMF generator for realistic telephone key tones</li>
+                <li><i class="fa-solid fa-check"></i> Rate limiter safety: 2 calls/number/hr, masked logging</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: EVIDENCE & EPIDEMIOLOGY ("Why This Matters") -->
+    <section class="evidence-section" id="evidence">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag-pill"><i class="fa-solid fa-book-medical"></i> Clinical &amp; Peer-Reviewed Evidence</div>
+          <h2 class="section-title">The Silent Crisis in <em>Postnatal Maternal Care</em></h2>
+          <p class="section-subtitle">
+            Every figure and citation presented below is grounded directly in official World Health Organization publications, the Bulletin of the WHO, and peer-reviewed journals.
+          </p>
+        </div>
+
+        <div class="evidence-stats-grid">
+          <div class="stat-big-card">
+            <div class="stat-number-wrapper">
+              <span class="stat-huge-number counter-anim" data-target="22">0</span><span class="stat-symbol">%</span>
+            </div>
+            <h3 class="stat-title">Pooled Prevalence of Postpartum Depression in India</h3>
+            <p class="stat-description">
+              A comprehensive systematic review of 38 studies across India demonstrated that nearly 1 in 4 women experience perinatal depressive symptoms, compounded by maternal anemia, marital friction, birth complications, and preference for male children.
+            </p>
+            <div class="citation-tag">
+              <i class="fa-solid fa-quote-left"></i> Upadhyay et al., Bulletin of the World Health Organization (2017)
+            </div>
+          </div>
+
+          <div class="evidence-cards-list">
+            <div class="evidence-card">
+              <div class="evidence-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="evidence-content">
+                <h4>EPDS Cut-off Validation (Levis et al., BMJ 2020)</h4>
+                <p>Individual-participant meta-analysis: score cut-off &ge;11 delivers the optimal balance of sensitivity (0.81) and specificity (0.88), while &ge;13 provides high specificity for clinical intervention.</p>
+                <a href="https://doi.org/10.1136/bmj.m4022" target="_blank" rel="noopener noreferrer" class="evidence-link">
+                  View BMJ 2020 Meta-Analysis <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="evidence-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="evidence-content">
+                <h4>IVR Screening Feasibility (Springer Arch Womens Ment Health)</h4>
+                <p>Clinical feasibility trial demonstrated 100% completion rate (all 54 participants completed the automated IVR survey), establishing phone check-ins as highly acceptable across socio-economic groups.</p>
+                <a href="https://link.springer.com/article/10.1007/s00737-007-0189-5" target="_blank" rel="noopener noreferrer" class="evidence-link">
+                  View Feasibility Study <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="evidence-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="evidence-content">
+                <h4>Rural Feasibility in Bihar (Int J Social Psychiatry 2021)</h4>
+                <p>Validated interactive voice response systems (IVRS) for routine maternal depression detection across rural primary healthcare setups with limited specialist availability.</p>
+                <a href="https://ideas.repec.org/a/sae/socpsy/v67y2021i5p467-471.html" target="_blank" rel="noopener noreferrer" class="evidence-link">
+                  View Rural Implementation Paper <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHO 2022 Postnatal Care Guidance Grid -->
+        <div class="who-guidelines-box">
+          <div class="who-box-header">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <div>
+              <h3>WHO 2022 Postnatal Care Recommendations</h3>
+              <p>The first six weeks after birth represent the highest risk window for both postpartum maternal mortality and depression onset.</p>
+            </div>
+          </div>
+          <div class="who-pills-row">
+            <span class="risk-chip">Postpartum Hemorrhage (1st 24h &bull; Days 1-7)</span>
+            <span class="risk-chip">Puerperal Sepsis (Fever &amp; Discharge)</span>
+            <span class="risk-chip">Severe Preeclampsia (Headache, Vision, Convulsions)</span>
+            <span class="risk-chip">Maternal Mental Well-being &amp; Anxiety</span>
+            <span class="risk-chip">Neonatal Feeding Inadequacy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 14-DAY PROTOCOL & ESCALATION LADDER -->
+    <section class="timeline-section" id="timeline-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag-pill"><i class="fa-solid fa-calendar-days"></i> Continuous Postnatal Surveillance</div>
+          <h2 class="section-title">The <em>14-Day Daily Schedule</em> &amp; Week-6 Milestone</h2>
+          <p class="section-subtitle">
+            Rather than relying solely on hospital visits, the system reaches out proactively to the mother’s handset across the vital recovery window.
+          </p>
+        </div>
+
+        <!-- Sticky Day Timeline Navigator -->
+        <div class="timeline-interactive-wrapper">
+          <div class="timeline-stepper" id="timelineStepper">
+            <button class="step-btn active" data-day="1">Day 1</button>
+            <button class="step-btn" data-day="2">Day 2</button>
+            <button class="step-btn" data-day="3">Day 3</button>
+            <button class="step-btn" data-day="5">Day 5</button>
+            <button class="step-btn" data-day="7">Day 7</button>
+            <button class="step-btn" data-day="10">Day 10</button>
+            <button class="step-btn" data-day="14">Day 14</button>
+            <button class="step-btn milestone" data-day="42">Week 6 (Milestone)</button>
+          </div>
+
+          <div class="timeline-card-display" id="timelineDisplayCard">
+            <!-- Dynamic Content populated via script.js -->
+            <div class="timeline-card-inner">
+              <div class="timeline-badge-row">
+                <span class="day-chip"><i class="fa-solid fa-clock"></i> DAY 1 CHECK-IN</span>
+                <span class="priority-chip high-prio">CRITICAL MONITORING</span>
+              </div>
+              <h3 class="timeline-title">Immediate Obstetric Hemorrhage &amp; Sepsis Screening</h3>
+              <p class="timeline-desc">
+                High-priority focus on physical postpartum danger signs: heavy soaking of pads within 1 hour, passing of large clots, foul odor, and persistent high fever. Initial newborn latching and breastfeeding confirmation.
+              </p>
+              <div class="timeline-action-list">
+                <div class="tl-action"><i class="fa-solid fa-check"></i> Automated IVR call at mother's preferred morning slot</div>
+                <div class="tl-action"><i class="fa-solid fa-check"></i> If unanswered: 3-tier retry schedule (15m, 1h, 3h) before marking Unreachable</div>
+                <div class="tl-action"><i class="fa-solid fa-check"></i> Escalation target: Local ASHA Worker notified via SMS &amp; Dashboard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escalation Ladder with Countdown Animation -->
+        <div class="escalation-ladder-section">
+          <div class="ladder-header">
+            <h3><i class="fa-solid fa-stairs"></i> The 3-Tier Rapid Escalation Ladder</h3>
+            <p>When an URGENT danger sign is detected during any call, an automated tiered timer triggers:</p>
+          </div>
+
+          <div class="ladder-grid">
+            <div class="ladder-tier active-tier">
+              <div class="tier-step">TIER 1 &bull; 0 TO 15 MIN</div>
+              <div class="tier-role">
+                <i class="fa-solid fa-user-nurse"></i>
+                <h4>ASHA Community Worker</h4>
+              </div>
+              <p>Receives real-time SMS broadcast and prioritized dashboard alert with mother's location and reported danger sign. Must acknowledge within 15 minutes.</p>
+              <div class="tier-timer">
+                <i class="fa-regular fa-clock"></i> Target SLA: <strong>15 Minutes</strong>
+              </div>
+            </div>
+
+            <div class="ladder-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="ladder-tier">
+              <div class="tier-step">TIER 2 &bull; 15 TO 45 MIN</div>
+              <div class="tier-role">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h4>ANM (Auxiliary Nurse Midwife)</h4>
+              </div>
+              <p>If unacknowledged by Tier 1, system auto-escalates to the sector Auxiliary Nurse Midwife for direct vehicle dispatch and emergency home visit.</p>
+              <div class="tier-timer">
+                <i class="fa-regular fa-clock"></i> Target SLA: <strong>45 Minutes</strong>
+              </div>
+            </div>
+
+            <div class="ladder-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="ladder-tier">
+              <div class="tier-step">TIER 3 &bull; &gt; 45 MIN</div>
+              <div class="tier-role">
+                <i class="fa-solid fa-hospital-user"></i>
+                <h4>PHC Medical Officer</h4>
+              </div>
+              <p>Critical unacknowledged emergency triggers direct mobile alert to the Primary Health Center Medical Officer for 108 Ambulance dispatch.</p>
+              <div class="tier-timer">
+                <i class="fa-regular fa-clock"></i> Target SLA: <strong>Immediate 108 Dispatch</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: HEALTH-WORKER DASHBOARD (Simulated Live Data) -->
+    <section class="dashboard-section" id="dashboard-section">
+      <div class="container">
+        <div class="dashboard-header-bar">
+          <div>
+            <div class="section-tag-pill"><i class="fa-solid fa-table-columns"></i> Clinical Triage Center</div>
+            <h2 class="section-title">ASHA Community Healthcare <em>Dashboard</em></h2>
+            <p class="section-subtitle">Real-time surveillance queue covering Kallakurichi &amp; Dindigul PHC sub-sectors.</p>
+          </div>
+          <div class="dashboard-actions">
+            <button class="btn btn-outline-plum btn-sm" id="refreshDashboardBtn">
+              <i class="fa-solid fa-arrows-rotate"></i> Refresh Queue
+            </button>
+            <button class="btn btn-plum btn-sm" id="addNewRegistrationModalBtn">
+              <i class="fa-solid fa-user-plus"></i> Register New Mother
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="kpi-cards-grid">
+          <div class="kpi-card urgent-border">
+            <div class="kpi-top">
+              <span>Urgent Danger Signs</span>
+              <span class="kpi-badge urgent-badge">Action Needed</span>
+            </div>
+            <div class="kpi-val" id="kpiUrgentCount">3</div>
+            <div class="kpi-footer"><i class="fa-solid fa-triangle-exclamation"></i> Hemorrhage, Convulsions, Crisis</div>
+          </div>
+
+          <div class="kpi-card followup-border">
+            <div class="kpi-top">
+              <span>Follow-Up Required</span>
+              <span class="kpi-badge followup-badge">In 48h</span>
+            </div>
+            <div class="kpi-val" id="kpiFollowupCount">6</div>
+            <div class="kpi-footer"><i class="fa-solid fa-calendar-check"></i> High Anxiety, Fever, Latch issues</div>
+          </div>
+
+          <div class="kpi-card safe-border">
+            <div class="kpi-top">
+              <span>Routine Stable</span>
+              <span class="kpi-badge safe-badge">Normal</span>
+            </div>
+            <div class="kpi-val" id="kpiSafeCount">24</div>
+            <div class="kpi-footer"><i class="fa-solid fa-circle-check"></i> Scheduled for next protocol day</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span>Calls Made Today</span>
+              <span class="kpi-badge">94.2% Answer Rate</span>
+            </div>
+            <div class="kpi-val" id="kpiTotalCalls">33</div>
+            <div class="kpi-footer"><i class="fa-solid fa-phone-arrow-down-left"></i> Average duration: 2m 14s</div>
+          </div>
+        </div>
+
+        <!-- Filter Chips & Search Bar -->
+        <div class="filter-controls-row">
+          <div class="filter-chips" id="tableFilterChips">
+            <button class="chip active" data-filter="all">All Patients (33)</button>
+            <button class="chip urgent-chip" data-filter="urgent">Urgent Escalations (3)</button>
+            <button class="chip followup-chip" data-filter="followup">Follow-Up Needed (6)</button>
+            <button class="chip safe-chip" data-filter="safe">Safe / Stable (24)</button>
+          </div>
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="patientSearchInput" placeholder="Search by mother name, phone, or village...">
+          </div>
+        </div>
+
+        <!-- Patients Data Table -->
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="dashboard-table" id="patientsDataTable">
+              <thead>
+                <tr>
+                  <th>Mother &amp; Village</th>
+                  <th>Delivery Date &amp; Day</th>
+                  <th>Risk Category</th>
+                  <th>Primary Findings</th>
+                  <th>Mood Trend</th>
+                  <th>Assigned ASHA</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="patientTableBody">
+                <!-- Populated dynamically via script.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- District Sub-Center Map-Style View -->
+        <div class="district-map-container">
+          <div class="district-map-header">
+            <h4><i class="fa-solid fa-map-location-dot"></i> District Sub-Center Triage Map (Kallakurichi Rural)</h4>
+            <span>3 Active Sub-centers &bull; Geo-tagged ASHA beats</span>
+          </div>
+          <div class="district-nodes-grid">
+            <div class="phc-node urgent-node">
+              <div class="phc-header">
+                <strong>Sector A &bull; Manalur PHC</strong>
+                <span class="badge-urgent">1 Critical Alert</span>
+              </div>
+              <p>ASHA: Lakshmi Devi &bull; Patient: Priya S. (Severe Bleeding reported at 10:14 AM)</p>
+              <div class="phc-progress-track">
+                <div class="progress-bar-fill urgent-fill" style="width: 85%;"></div>
+              </div>
+            </div>
+
+            <div class="phc-node followup-node">
+              <div class="phc-header">
+                <strong>Sector B &bull; Chinnasalem Sub-center</strong>
+                <span class="badge-followup">2 Follow-ups</span>
+              </div>
+              <p>ASHA: Mary Stella &bull; Feeding support and anxiety follow-up scheduled today</p>
+              <div class="phc-progress-track">
+                <div class="progress-bar-fill followup-fill" style="width: 45%;"></div>
+              </div>
+            </div>
+
+            <div class="phc-node safe-node">
+              <div class="phc-header">
+                <strong>Sector C &bull; Sankarapuram PHC</strong>
+                <span class="badge-safe">All Stable</span>
+              </div>
+              <p>ASHA: K. Meena &bull; 12 mothers contacted, 100% adherence to iron supplements</p>
+              <div class="phc-progress-track">
+                <div class="progress-bar-fill safe-fill" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: EPDS 10-ITEM SELF-CHECK (Cox, Holden & Sagovsky, 1987) -->
+    <section class="epds-section" id="epds-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag-pill"><i class="fa-solid fa-clipboard-check"></i> Standardized Perinatal Screening</div>
+          <h2 class="section-title">The 10-Item <em>Edinburgh Postnatal Depression Scale (EPDS)</em></h2>
+          <p class="section-subtitle">
+            Attributed to Cox, Holden &amp; Sagovsky (1987). Screen yourself or a family member. Shows evidence cut-offs (10 / 11 / 13) with BMJ 2020 sensitivity &amp; specificity. Non-zero score on Item 10 immediately triggers emergency crisis protocols.
+          </p>
+        </div>
+
+        <div class="card epds-card">
+          <div class="epds-disclaimer-banner">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong>Clinical Assessment Notice:</strong>
+              This questionnaire is a validated screening aid, not a clinical diagnosis. It reflects your feelings over the past 7 days. If you are experiencing distress, reach out to Tele-MANAS (14416) or emergency services (112) immediately.
+            </div>
+          </div>
+
+          <form id="epdsQuizForm">
+            <div class="epds-questions-wrapper" id="epdsQuestionsContainer">
+              <!-- Rendered dynamically by script.js with all 10 items -->
+            </div>
+
+            <div class="epds-footer-actions">
+              <button type="submit" class="btn btn-plum magnetic-btn" id="calculateEpdsScoreBtn">
+                <i class="fa-solid fa-calculator"></i> Calculate Validated Score &amp; Interpretation
+              </button>
+              <button type="button" class="btn btn-outline-plum" id="resetEpdsQuizBtn">
+                Reset Form
+              </button>
+            </div>
+          </form>
+
+          <!-- EPDS Result Card (Initially Hidden) -->
+          <div class="epds-result-panel hidden" id="epdsResultPanel">
+            <div class="epds-score-header">
+              <div class="score-circle">
+                <span class="score-number" id="epdsTotalScoreVal">0</span>
+                <span class="score-max">/ 30</span>
+              </div>
+              <div class="score-summary">
+                <h3 id="epdsRiskCategoryTitle">Low Probability of Depression</h3>
+                <p id="epdsRiskCategoryDescription">Your score suggests routine adjustment emotions. Continue healthy self-care and rest.</p>
+              </div>
+            </div>
+
+            <!-- EPDS Cut-Off Comparison Chart -->
+            <div class="epds-bands-breakdown">
+              <h4>Evidence-Based Cut-Off Bands (BMJ 2020 Meta-Analysis):</h4>
+              <div class="bands-grid">
+                <div class="band-item" id="band10">
+                  <span class="band-range">Score &lt; 10</span>
+                  <span class="band-status safe-text">Normal / Sub-clinical</span>
+                  <span class="band-stats">Low likelihood of major depression.</span>
+                </div>
+                <div class="band-item" id="band11">
+                  <span class="band-range">Score 11 - 12</span>
+                  <span class="band-status followup-text">Recommended Cut-off</span>
+                  <span class="band-stats">Best balance: Sens 0.81 &bull; Spec 0.88</span>
+                </div>
+                <div class="band-item" id="band13">
+                  <span class="band-range">Score &ge; 13</span>
+                  <span class="band-status urgent-text">High Specificity Threshold</span>
+                  <span class="band-stats">Substantial risk of moderate to severe PPD.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crisis Banner if Question 10 is > 0 -->
+            <div class="crisis-card-epds hidden" id="epdsCrisisCard">
+              <div class="crisis-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+              <div class="crisis-body">
+                <h4>You Are Not Alone. Immediate Support is Available.</h4>
+                <p>You noted experiencing thoughts of self-harm. Please know that this is a symptom that can be treated, and compassionate counselors are ready to speak with you free of charge in your preferred language right now.</p>
+                <a href="tel:14416" class="btn btn-crisis pulse-glow">
+                  <i class="fa-solid fa-phone"></i> Call Tele-MANAS (14416) Free
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FAMILY COMPANION (Message for Husbands / Relatives) -->
+    <section class="family-companion-section" id="family-companion">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag-pill"><i class="fa-solid fa-people-roof"></i> Support Circle</div>
+          <h2 class="section-title">The <em>Family Companion</em> Guide</h2>
+          <p class="section-subtitle">
+            A practical, cultural handbook for husbands, partners, mothers-in-law, and relatives. Postnatal recovery requires community care, not isolated burden.
+          </p>
+        </div>
+
+        <div class="family-cards-grid">
+          <div class="family-card">
+            <div class="card-num">01</div>
+            <h3>What to Watch For</h3>
+            <p>Persistent crying spells, withdrawal from the newborn, expressing feelings of worthlessness, insomnia even when the infant sleeps, or intense agitation.</p>
+          </div>
+
+          <div class="family-card">
+            <div class="card-num">02</div>
+            <h3>What NOT to Say</h3>
+            <p>Avoid phrases like <em>"Why are you sad when you have a healthy baby?"</em> or <em>"Every mother goes through this, toughen up."</em> Hormonal and biochemical shifts require patience and support.</p>
+          </div>
+
+          <div class="family-card">
+            <div class="card-num">03</div>
+            <h3>Practical Daily Actions</h3>
+            <p>Take charge of night-time soothing shifts. Protect 4 hours of uninterrupted sleep for the mother. Ensure regular iron/calcium supplements and hydration.</p>
+          </div>
+
+          <div class="family-card highlight-card">
+            <div class="card-num">04</div>
+            <h3>Instant SMS Companion</h3>
+            <p>Husbands can opt-in to receive a daily supportive prompt tailored to the baby's exact age in days.</p>
+            <button class="btn btn-outline-plum btn-sm" id="sendFamilyDemoSmsBtn">
+              <i class="fa-solid fa-envelope"></i> Preview Sample Daily SMS
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <i class="fa-solid fa-heart-pulse"></i> Aanchal<strong>Alert</strong>
+        </div>
+        <p>
+          An automated maternal voice-surveillance platform connecting postpartum mothers with frontline ASHA workers and Primary Health Centers across rural and semi-urban India.
+        </p>
+        <p class="footer-disclaimer">
+          <strong>Notice:</strong> This system is a tele-screening and escalation triage tool. It does not provide medical diagnoses or replace direct obstetrical care. In life-threatening emergencies, dial 112 or visit the nearest emergency department.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#hero">Overview</a></li>
+          <li><a href="#live-call-section">Live Voice Simulation</a></li>
+          <li><a href="#timeline-section">14-Day Surveillance Schedule</a></li>
+          <li><a href="#dashboard-section">ASHA Worker Queue</a></li>
+          <li><a href="#epds-section">10-Item EPDS Self-Check</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Evidence &amp; Guidance</h5>
+        <ul>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5689195/" target="_blank" rel="noopener">Upadhyay et al. (WHO 2017)</a></li>
+          <li><a href="https://doi.org/10.1136/bmj.m4022" target="_blank" rel="noopener">Levis et al. (BMJ 2020)</a></li>
+          <li><a href="https://telemanas.mohfw.gov.in" target="_blank" rel="noopener">Tele-MANAS National Portal</a></li>
+          <li><a href="https://www.who.int/publications/i/item/9789240045989" target="_blank" rel="noopener">WHO Postnatal Guidelines 2022</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Helpline Contacts</h5>
+        <div class="footer-helpline-box">
+          <p><strong>Tele-MANAS:</strong> 14416 (24/7, Toll-Free)</p>
+          <p><strong>Emergency Response:</strong> 112</p>
+          <p><strong>Ambulance:</strong> 108</p>
+          <p><strong>Childline:</strong> 1098</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <p>&copy; 2026 Postpartum Depression Alert Platform &bull; Built for public health equity.</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING 24/7 CRISIS BUTTON -->
+  <aside class="floating-helpline-fab">
+    <button class="fab-btn pulse-glow" id="fabHelplineBtn" aria-label="Open emergency crisis helplines">
+      <i class="fa-solid fa-phone"></i>
+      <span class="fab-text">24/7 Support: 14416</span>
+    </button>
+  </aside>
+
+  <!-- ==================== MODALS & POP-UPS ==================== -->
+
+  <!-- 1. WELCOME DEMO MODAL (Explains the simulation) -->
+  <div class="modal-overlay hidden" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="welcomeModalTitle"><i class="fa-solid fa-hands-holding-child"></i> Welcome to Postpartum Depression Alert</h3>
+        <button class="modal-close-btn" data-close-modal="welcomeModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This prototype demonstrates an <strong>automated voice-call surveillance system</strong> engineered for new mothers in India.</p>
+        <div class="welcome-features-list">
+          <div class="wf-item">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+              <strong>Interactive Audio Call Simulator:</strong>
+              Experience an in-browser IVR call with real speech synthesis and keypad interaction.
+            </div>
+          </div>
+          <div class="wf-item">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <div>
+              <strong>Clinical Decision Engine:</strong>
+              Scores physical hemorrhage/infection danger signs and perinatal mood scores (EPDS-based).
+            </div>
+          </div>
+          <div class="wf-item">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+              <strong>Instant ASHA Worker Escalation:</strong>
+              See how alerts immediately propagate to the dashboard and simulate SMS dispatches.
+            </div>
+          </div>
+        </div>
+        <p class="demo-sub-note">
+          <i class="fa-solid fa-shield-halved"></i> <em>Privacy guarantee:</em> No real calls are billed or dispatched without explicit Twilio server configuration. All numbers in demo mode remain local.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-plum" data-close-modal="welcomeModal">Explore the Platform</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CONSENT MODAL -->
+  <div class="modal-overlay hidden" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="consentModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="consentModalTitle"><i class="fa-solid fa-file-contract"></i> Maternal Consent &amp; Privacy Protocol</h3>
+        <button class="modal-close-btn" data-close-modal="consentModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4>1. Scope of Automated Calls</h4>
+        <p>Automated telephone check-ins occur daily across the first 14 days and at Week 6. Each call takes approximately 90 to 120 seconds, screening for physical recovery milestones and emotional wellness.</p>
+
+        <h4>2. Escalation &amp; Health Worker Notice</h4>
+        <p>If physical warning signs (such as heavy bleeding, high fever, severe headache) or crisis self-harm ideation are reported, automated SMS notices will be dispatched to the mapped ASHA community worker and PHC.</p>
+
+        <h4>3. Data Confidentiality &amp; Number Masking</h4>
+        <p>Phone numbers are masked in all logs (e.g., +91 98765 ••••10). Data is utilized strictly for triage escalation and is never sold or shared with commercial entities.</p>
+
+        <h4>4. Voluntary Participation</h4>
+        <p>The patient or family may opt out at any time by pressing 9 during a call or requesting the local ASHA worker to suspend the schedule.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-plum" id="acceptConsentFromModalBtn">I Understand &amp; Agree</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. LIVE CALL IN PROGRESS MODAL (Real-time SSE Timeline + On-Screen Keypad) -->
+  <div class="modal-overlay hidden" id="liveCallModal" role="dialog" aria-modal="true" aria-labelledby="liveCallModalTitle">
+    <div class="modal-card call-dialog-card">
+      <div class="modal-header call-dialog-header">
+        <div class="call-dialog-title-group">
+          <span class="live-dot pulse"></span>
+          <h3 id="liveCallModalTitle">Simulated IVR Call in Progress</h3>
+        </div>
+        <button class="modal-close-btn" id="hangupCallModalBtn" title="Hang Up Call"><i class="fa-solid fa-phone-slash"></i></button>
+      </div>
+
+      <div class="modal-body call-dialog-body">
+        <!-- Live Status Timeline (Simulating SSE telemetry stream) -->
+        <div class="call-timeline-stream">
+          <div class="stream-step active" id="sseStepQueued">
+            <span class="step-icon"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+            <span class="step-label">Call Queued</span>
+          </div>
+          <div class="stream-step" id="sseStepRinging">
+            <span class="step-icon"><i class="fa-solid fa-bell"></i></span>
+            <span class="step-label">Ringing</span>
+          </div>
+          <div class="stream-step" id="sseStepAnswered">
+            <span class="step-icon"><i class="fa-solid fa-phone"></i></span>
+            <span class="step-label">Connected</span>
+          </div>
+          <div class="stream-step" id="sseStepScreening">
+            <span class="step-icon"><i class="fa-solid fa-clipboard-question"></i></span>
+            <span class="step-label">Screening (Q1-Q8)</span>
+          </div>
+          <div class="stream-step" id="sseStepCompleted">
+            <span class="step-icon"><i class="fa-solid fa-flag-checkered"></i></span>
+            <span class="step-label">Triage Result</span>
+          </div>
+        </div>
+
+        <!-- Speaker Waveform & Speech Output -->
+        <div class="interactive-speaker-box">
+          <div class="audio-avatar">
+            <i class="fa-solid fa-user-nurse"></i>
+          </div>
+          <div class="audio-transcript-area">
+            <span class="speaker-tag" id="currentSpeakerName">Automated Care Assistant (Voice: en-IN):</span>
+            <p class="transcript-live-text" id="liveCallPromptText">Connecting call with mother...</p>
+          </div>
+        </div>
+
+        <!-- On-Screen Phone Keypad for Responses -->
+        <div class="keypad-container">
+          <div class="keypad-prompt-hint" id="keypadActionHint">
+            Listen to the question, then press your answer on the keypad below:
+          </div>
+
+          <div class="keypad-grid">
+            <button class="keypad-btn" data-key="1">
+              <span class="digit">1</span>
+              <span class="sub">YES / Always</span>
+            </button>
+            <button class="keypad-btn" data-key="2">
+              <span class="digit">2</span>
+              <span class="sub">NO / Rarely</span>
+            </button>
+            <button class="keypad-btn" data-key="3">
+              <span class="digit">3</span>
+              <span class="sub">Sometimes</span>
+            </button>
+            <button class="keypad-btn" data-key="4">
+              <span class="digit">4</span>
+              <span class="sub">Often</span>
+            </button>
+            <button class="keypad-btn" data-key="9">
+              <span class="digit">9</span>
+              <span class="sub">Repeat Question</span>
+            </button>
+            <button class="keypad-btn danger-key" id="hangupKeypadBtn">
+              <span class="digit"><i class="fa-solid fa-phone-slash"></i></span>
+              <span class="sub">End Call</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Real-time Keypad Responses Audit Trail -->
+        <div class="call-responses-feed">
+          <h4><i class="fa-solid fa-receipt"></i> Recorded Responses (Live Telemetry):</h4>
+          <ul id="liveResponsesAuditList" class="audit-list">
+            <li class="empty-state">No questions answered yet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CALL TRIAGE RESULT MODAL -->
+  <div class="modal-overlay hidden" id="callResultModal" role="dialog" aria-modal="true" aria-labelledby="resultModalTitle">
+    <div class="modal-card result-modal-card">
+      <div class="modal-header">
+        <h3 id="resultModalTitle"><i class="fa-solid fa-square-poll-vertical"></i> Clinical Triage Summary</h3>
+        <button class="modal-close-btn" data-close-modal="callResultModal" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="result-badge-banner" id="resultStatusBanner">
+          <div class="result-status-pill" id="resultStatusPill">URGENT DANGER DETECTED</div>
+          <h2 id="resultStatusHeadline">Red Escalation Protocol Activated</h2>
+          <p id="resultStatusExplanation">Heavy bleeding reported within 1 hour post-birth.</p>
+        </div>
+
+        <div class="result-details-grid">
+          <div class="result-box">
+            <h4><i class="fa-solid fa-clipboard-list"></i> Recorded Responses:</h4>
+            <div id="resultAnswersList" class="result-answers-list"></div>
+          </div>
+
+          <div class="result-box">
+            <h4><i class="fa-solid fa-bell"></i> Automated ASHA Alert Dispatched:</h4>
+            <div class="asha-sms-preview" id="resultAshaSmsPreview">
+              <!-- SMS draft generated by script.js -->
+            </div>
+            <div class="sla-clock-box">
+              <i class="fa-solid fa-stopwatch"></i>
+              <span>Countdown to Tier 2 ANM Escalation: <strong id="escalationCountdownTimer">14:59</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-plum" data-close-modal="callResultModal">Close Summary</button>
+        <a href="#dashboard-section" class="btn btn-plum" data-close-modal="callResultModal">View on ASHA Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. VERIFIED EXTERNAL HELPLINES MODAL -->
+  <div class="modal-overlay hidden" id="helplineModal" role="dialog" aria-modal="true" aria-labelledby="helplineModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="helplineModalTitle"><i class="fa-solid fa-phone-volume"></i> Verified External Emergency &amp; Crisis Services</h3>
+        <button class="modal-close-btn" data-close-modal="helplineModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="helpline-notice-box" style="background: var(--color-blush-light); border: 1px solid var(--color-blush); padding: 14px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.86rem;">
+          <i class="fa-solid fa-circle-info" style="color: var(--color-plum);"></i> <strong>Important Distinction:</strong> The following emergency helplines are official, external Government of India public services. They are independent of the "Postpartum Depression Alert" software prototype. All helplines listed below are free, confidential, and operable 24/7.
+        </div>
+
+        <div class="helpline-cards-stack">
+          <div class="helpline-card highlight-card">
+            <div class="hl-content">
+              <h4>Tele-MANAS (National Mental Health Helpline)</h4>
+              <p>Operated by the Ministry of Health &amp; Family Welfare (MoHFW), Govt. of India. 24/7 toll-free counseling in 20+ regional Indian languages.</p>
+              <span class="hl-number">Official Toll-Free: 14416 or 1800 891 4416</span>
+            </div>
+            <a href="tel:14416" class="btn btn-plum" rel="external">Call 14416</a>
+          </div>
+
+          <div class="helpline-card">
+            <div class="hl-content">
+              <h4>112 National Emergency Response Support System (ERSS)</h4>
+              <p>Unified emergency support for police, fire, medical dispatch, and disaster response across all Indian States and Union Territories.</p>
+              <span class="hl-number">Official Emergency Dial: 112</span>
+            </div>
+            <a href="tel:112" class="btn btn-outline-plum" rel="external">Call 112</a>
+          </div>
+
+          <div class="helpline-card">
+            <div class="hl-content">
+              <h4>108 Free National Ambulance Service</h4>
+              <p>Government emergency medical ambulance transport directly to the nearest Primary Health Center (PHC) or District Hospital.</p>
+              <span class="hl-number">Official Ambulance Dial: 108</span>
+            </div>
+            <a href="tel:108" class="btn btn-outline-plum" rel="external">Call 108</a>
+          </div>
+
+          <div class="helpline-card">
+            <div class="hl-content">
+              <h4>Local Frontline ASHA Community Worker</h4>
+              <p>Assigned through your local village Sub-center / Primary Health Center (PHC) for scheduled home checkups, iron supplement refills, and maternal counseling.</p>
+              <span class="hl-number">Assigned via Village Health Sub-center</span>
+            </div>
+            <button class="btn btn-outline-plum" id="ashaDirectCallSimBtn">Simulate ASHA Escalation</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-plum" data-close-modal="helplineModal">Close Resource List</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. NEW MOTHER REGISTRATION MODAL -->
+  <div class="modal-overlay hidden" id="registrationModal" role="dialog" aria-modal="true" aria-labelledby="regModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="regModalTitle"><i class="fa-solid fa-user-plus"></i> Register New Mother for Automated Surveillance</h3>
+        <button class="modal-close-btn" data-close-modal="registrationModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newMotherForm">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="regMotherName">Mother's Full Name *</label>
+              <input type="text" id="regMotherName" class="form-control" required placeholder="e.g. Meenakshi Sundaram">
+            </div>
+            <div class="form-group flex-1">
+              <label for="regPhone">Phone Number *</label>
+              <input type="tel" id="regPhone" class="form-control" required placeholder="9876543210">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="regDeliveryDate">Delivery Date *</label>
+              <input type="date" id="regDeliveryDate" class="form-control" required>
+            </div>
+            <div class="form-group flex-1">
+              <label for="regCallTime">Preferred Call Time *</label>
+              <select id="regCallTime" class="form-control">
+                <option value="morning">Morning (09:00 AM - 11:00 AM)</option>
+                <option value="afternoon">Afternoon (02:00 PM - 04:00 PM)</option>
+                <option value="evening">Evening (06:00 PM - 08:00 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="regLanguage">Preferred Spoken Dialect *</label>
+              <select id="regLanguage" class="form-control">
+                <option value="ta">Tamil (தமிழ்)</option>
+                <option value="hi">Hindi (हिंदी)</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label for="regPhc">Assigned PHC / Sub-Center *</label>
+              <select id="regPhc" class="form-control">
+                <option value="Kallakurichi">Kallakurichi Rural PHC</option>
+                <option value="Dindigul">Dindigul West Sub-center</option>
+                <option value="Sitapur">Sitapur Community Health Post</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Respectful & Skippable Support Profile -->
+          <div class="support-profile-box">
+            <div class="support-profile-header">
+              <h5><i class="fa-solid fa-hand-holding-hand"></i> Optional Social &amp; Support Profile (Skippable)</h5>
+              <small>Helps the ASHA worker tailor home visits. Skip anytime.</small>
+            </div>
+            <div class="checkbox-grid">
+              <label class="cb-item">
+                <input type="checkbox" id="chkFinancialStress">
+                <span>Severe financial strain / wage loss</span>
+              </label>
+              <label class="cb-item">
+                <input type="checkbox" id="chkAloneAtHome">
+                <span>Little or no family help at home</span>
+              </label>
+              <label class="cb-item">
+                <input type="checkbox" id="chkPastMentalHealth">
+                <span>Previous history of severe anxiety / depression</span>
+              </label>
+              <label class="cb-item">
+                <input type="checkbox" id="chkDomesticSafety">
+                <span>Concerns about domestic safety or marital conflict</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="consent-checkbox-reg">
+            <input type="checkbox" id="regConsentConfirm" required>
+            <label for="regConsentConfirm">Informed verbal or written consent obtained from patient or guardian.</label>
+          </div>
+
+          <div class="modal-footer-inside">
+            <button type="submit" class="btn btn-plum btn-full-width">Register &amp; Initialize 14-Day Protocol</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. ASHA ESCALATION POP-UP (When urgent case is triggered) -->
+  <div class="modal-overlay hidden" id="ashaEscalationAlertModal" role="dialog" aria-modal="true" aria-labelledby="ashaModalTitle">
+    <div class="modal-card asha-alert-card">
+      <div class="asha-card-top">
+        <div class="alert-pulse-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div>
+          <span class="urgent-pill">IMMEDIATE CLINICAL ESCALATION</span>
+          <h3 id="ashaModalTitle">ASHA Worker Dispatched</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="asha-profile-summary">
+          <div class="worker-avatar">
+            <i class="fa-solid fa-user-nurse"></i>
+          </div>
+          <div class="worker-details">
+            <h4 id="alertAshaName">Lakshmi Devi (ASHA ID: #TN-KLK-842)</h4>
+            <p>Assigned Beat: Kallakurichi Rural Ward 4 &bull; Phone: +91 94421 ••••82</p>
+            <p class="sms-status-pill"><i class="fa-solid fa-paper-plane"></i> Automated SMS Alert Delivered Successfully</p>
+          </div>
+        </div>
+
+        <div class="dispatched-patient-box">
+          <h5>Patient in Distress:</h5>
+          <p><strong>Name:</strong> <span id="alertPatientName">Priya S.</span></p>
+          <p><strong>Triggered Danger Sign:</strong> <span id="alertDangerSign">Severe Postpartum Bleeding (Pad soaked &lt; 1 hr)</span></p>
+          <p><strong>Primary Recommended Action:</strong> Immediate home assessment, uterine massage, check for shock, prepare transport to Kallakurichi PHC.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-plum" data-close-modal="ashaEscalationAlertModal">Acknowledge &amp; Open Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+  <!-- Core JavaScript Application -->
+  <script src="script.js"></script>
+</body>
+</html>
